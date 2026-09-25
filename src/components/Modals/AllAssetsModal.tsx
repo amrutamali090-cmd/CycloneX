@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { InfrastructureAsset, AssetType } from '../../types/cyclone';
 import { X, Search, Filter, Download, Crosshair, PlusSquare, Zap, AlertTriangle, Users } from 'lucide-react';
 
@@ -53,9 +54,15 @@ export const AllAssetsModal: React.FC<AllAssetsModalProps> = ({
     document.body.removeChild(link);
   };
 
-  return (
-    <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
-      <div className="relative w-full max-w-5xl bg-[#090f1f] border border-slate-700 rounded-2xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh]">
+  const modalContent = (
+    <div
+      className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center p-4"
+      style={{ zIndex: 1050 }}
+    >
+      <div
+        className="relative w-full max-w-5xl bg-[#090f1f] border border-slate-700 rounded-2xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh]"
+        style={{ zIndex: 1051 }}
+      >
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-slate-800">
           <div>
@@ -225,4 +232,6 @@ export const AllAssetsModal: React.FC<AllAssetsModalProps> = ({
       </div>
     </div>
   );
+
+  return createPortal(modalContent, document.body);
 };

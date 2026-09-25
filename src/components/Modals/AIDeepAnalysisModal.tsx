@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { CycloneScenario, SimulationParams } from '../../types/cyclone';
 import { generateCycloneAnalysis, GeneratedAIAnalysis } from '../../services/geminiService';
 import { X, Sparkles, Send, BrainCircuit, ShieldAlert, CheckCircle, RefreshCw } from 'lucide-react';
@@ -49,9 +50,15 @@ export const AIDeepAnalysisModal: React.FC<AIDeepAnalysisModalProps> = ({
     }
   };
 
-  return (
-    <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
-      <div className="relative w-full max-w-3xl bg-[#090f1f] border border-slate-700 rounded-2xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh]">
+  const modalContent = (
+    <div
+      className="fixed inset-0 bg-black/85 backdrop-blur-md flex items-center justify-center p-4"
+      style={{ zIndex: 1050 }}
+    >
+      <div
+        className="relative w-full max-w-3xl bg-[#090f1f] border border-slate-700 rounded-2xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh]"
+        style={{ zIndex: 1051 }}
+      >
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-slate-800 bg-[#0a1226]">
           <div className="flex items-center gap-2.5">
@@ -224,4 +231,6 @@ export const AIDeepAnalysisModal: React.FC<AIDeepAnalysisModalProps> = ({
       </div>
     </div>
   );
+
+  return createPortal(modalContent, document.body);
 };

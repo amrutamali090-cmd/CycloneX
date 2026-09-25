@@ -1,4 +1,5 @@
 import React from 'react';
+import { createPortal } from 'react-dom';
 import { X, Settings, Sliders, Volume2, Globe, Cpu } from 'lucide-react';
 
 interface SettingsModalProps {
@@ -20,9 +21,15 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
 }) => {
   if (!isOpen) return null;
 
-  return (
-    <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
-      <div className="relative w-full max-w-md bg-[#090f1f] border border-slate-700 rounded-2xl overflow-hidden shadow-2xl">
+  const modalContent = (
+    <div
+      className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center p-4"
+      style={{ zIndex: 1050 }}
+    >
+      <div
+        className="relative w-full max-w-md bg-[#090f1f] border border-slate-700 rounded-2xl overflow-hidden shadow-2xl"
+        style={{ zIndex: 1051 }}
+      >
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-slate-800 bg-[#0a1226]">
           <div className="flex items-center gap-2">
@@ -109,4 +116,6 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
       </div>
     </div>
   );
+
+  return createPortal(modalContent, document.body);
 };

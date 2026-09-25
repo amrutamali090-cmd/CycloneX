@@ -1,0 +1,6 @@
+{
+  "name": "CycloneX - Cyclone Impact Intelligence",
+  "description": "AI-powered cyclone impact intelligence and infrastructure vulnerability analysis platform for disaster-management teams.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
